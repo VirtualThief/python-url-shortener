@@ -7,4 +7,9 @@ services:
       target: back_test
     volumes:
       - ./backend/app:/app
+    environment:
+      - FLASK_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
     command: pytest

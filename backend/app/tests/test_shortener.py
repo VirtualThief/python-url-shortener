@@ -5,7 +5,7 @@ import pytest
 
 from app import start
 
-
+        
 @pytest.fixture
 def client():
     """Configure testing client"""

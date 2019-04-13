@@ -27,6 +27,7 @@ def test_converts_some_numbers_correctly():
     res = convert_base62(1000000)
     assert res == '29c4'
 
+
 def test_convert_from_base62_string():
     """Test that some base62 strings are converted to integers correctly"""
 
