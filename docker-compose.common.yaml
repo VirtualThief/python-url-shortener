@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  back:
+    environment:
+      - FLASK_APP=start.py
+    ports:
+      - "5000:5000"
+    command: flask run --host=0.0.0.0
+    depends_on: 
+      - redis
+
+  redis:
+    image: "redis:5-alpine"

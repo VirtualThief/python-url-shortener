@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  back:
+    build:
+      context: ./backend
+    environment:
+      - FLASK_ENV=development
+    volumes:
+      - ./backend/app:/app
