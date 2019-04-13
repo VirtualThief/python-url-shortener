@@ -1,9 +1,7 @@
-version: '3'
+version: '3.4'
 
 services:
   back:
-    build:
-      context: ./backend
     environment:
       - FLASK_ENV=development
     volumes:

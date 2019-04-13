@@ -5,7 +5,7 @@ class ShortenerController:
 
     def index(self):
         """Returns the index page"""
-        return render_template('index.html')
+        return render_template('index.jinja')
 
     def postUrl(self, url):
         """Posts new URL to shortener service"""
