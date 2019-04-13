@@ -1,7 +1,7 @@
 import os
 
 import redis
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 from app.controllers.shortener_controller import ShortenerController
 
@@ -30,3 +30,9 @@ def redirect(short_id):
     """Redirect to full URL by short link"""
     shortenerController = ShortenerController(r)
     return shortenerController.redirect(short_id)
+
+
+@app.errorhandler(404)
+def not_found(e):
+    """Handler for 404 error"""
+    return render_template('404.jinja'), 404

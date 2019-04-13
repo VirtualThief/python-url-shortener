@@ -1,0 +1,9 @@
+{% extends "template.jinja" %}
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h2>Your short link:</h2>
+    <input type="text" class="form-control" value="http://localhost:5000/{{ short_url }}" disabled />
+  </div>
+</div>
+{% endblock content %}

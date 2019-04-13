@@ -32,14 +32,42 @@ def test_redirect_reads_url_from_database():
 
 def test_redirect_searches_for_stripped_value():
     """Test that short id is stripped before searching in database"""
-    raise NotImplementedError
+    
+    short_url_id = '   abcdef   '
+    stripped_short_id = 'abcdef'
+    url = 'https://google.com/'
+    redisMock = Mock()
+    redisMock.get.return_value = url
+
+    controller = ShortenerController(redisMock)
+    controller.redirect(short_url_id)
+
+    redisMock.get.assert_called_once_with(stripped_short_id)
 
 
 def test_redirect_redirects_to_url_if_short_link_exists():
     """Test that redirects to URL if it exists in database"""
-    raise NotImplementedError
+
+    short_url = 'abcdef'
+    url = 'https://google.com/'
+    redisMock = Mock()
+    redisMock.get.return_value = url
+
+    controller = ShortenerController(redisMock)
+    res = controller.redirect(short_url)
+
+    assert res.status_code == 302
+    assert res.headers['Location'] == url
 
 
 def test_redirect_returns_404_if_link_not_exists():
     """Test that 404 is returned if link doesn't exist in database"""
-    raise NotImplementedError
+
+    short_url = 'abcdef'
+    redisMock = Mock()
+    redisMock.get.return_value = None
+
+    controller = ShortenerController(redisMock)
+    res = controller.redirect(short_url)
+
+    assert res.status_code == 404

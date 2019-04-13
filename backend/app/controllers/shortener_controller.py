@@ -1,6 +1,6 @@
 import uuid
 
-from flask import render_template
+from flask import render_template, redirect, abort
 
 from app.utilities.base64_converter import convert_base62
 
@@ -24,8 +24,12 @@ class ShortenerController:
         short_url_id = convert_base62(id.int)
         self.redis.set(short_url_id, url)
 
-        return short_url_id
+        return render_template('short_link.jinja', short_url = short_url_id)
 
     def redirect(self, short_id):
         """Redirects to URL by short link, or 404 otherwise"""
-        self.redis.get(short_id)
+        url = self.redis.get(short_id.strip())
+        if not url or len(url.strip()) == 0:
+            abort(404) 
+
+        return redirect(url)
